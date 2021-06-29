@@ -8,6 +8,14 @@
 		"jsx": "react",
 		"esModuleInterop": true,
 		"allowJs": true,
-		"lib": ["es5", "ES2015", "ES2016", "ES2017", "ES2020", "ESNEXT", "DOM"]
+		"lib": ["es5", "ES2015", "ES2016", "ES2017", "ES2020", "ESNEXT", "DOM"],
+		"paths": {
+			"@assets/*": ["./src/assets/*"],
+			"@components/*": ["./src/components/*"],
+			"@hooks/*": ["./src/hooks/*"],
+			"@layouts/*": ["./src/layouts/*"],
+			"@routes/*": ["./src/routes/*"],
+			"@styles/*": ["./src/styles/*"]
+		}
 	}
 }

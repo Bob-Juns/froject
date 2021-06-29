@@ -10,14 +10,12 @@ module.exports = {
 	resolve: {
 		extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.html'],
 		alias: {
-			'@src': path.resolve(__dirname, './src'),
-			'@assets': path.resolve(__dirname, './src/assets'),
-			'@config': path.resolve(__dirname, './config.ts'),
-			'@layouts': path.resolve(__dirname, './src/layouts'),
-			'@libs': path.resolve(__dirname, './src/libs'),
-			'@styles': path.resolve(__dirname, './src/styles'),
-			'@redux': path.resolve(__dirname, './src/redux'),
-			'@components': path.resolve(__dirname, './src/components'),
+			'@assets': path.resolve(__dirname, 'src/assets'),
+			'@components': path.resolve(__dirname, 'src/components'),
+			'@hooks': path.resolve(__dirname, 'src/hooks'),
+			'@layouts': path.resolve(__dirname, 'src/layouts'),
+			'@routes': path.resolve(__dirname, 'src/routes'),
+			'@styles': path.resolve(__dirname, 'src/styles'),
 		},
 	},
 	entry: {
@@ -34,6 +32,10 @@ module.exports = {
 				enforce: 'pre',
 				test: /\.js$/,
 				loader: 'source-map-loader',
+			},
+			{
+				test: /\.svg$/,
+				use: ['@svgr/webpack'],
 			},
 			{
 				test: /\.(jpg|jpeg|png)$/,
