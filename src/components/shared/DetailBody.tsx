@@ -2,34 +2,38 @@ import React from 'react';
 
 // styles
 import styled from 'styled-components';
-import { size, color } from '@styles/SharedStyle';
+import { size, color, device } from '@styles/SharedStyle';
 
 type DetailBodyProps = {
-	title: string;
-	children: React.ReactNode;
+  title: string;
+  children: React.ReactNode;
 };
 
 const DetailBody = ({ title, children }: DetailBodyProps) => {
-	return (
-		<Container>
-			<Title>{title}</Title>
-			{children}
-		</Container>
-	);
+  return (
+    <Container>
+      <Title>{title}</Title>
+      {children}
+    </Container>
+  );
 };
 
 const Container = styled.div`
-	width: 100%;
+  width: 100%;
 `;
 
 const Title = styled.h1`
-	width: 100%;
-	margin-bottom: ${size.tiny};
+  width: 100%;
+  margin-bottom: ${size.tiny};
 
-	color: ${color.purple.dark};
+  color: ${color.purple.dark};
 
-	font-size: ${size.small};
-	font-weight: 800;
+  font-size: ${size.small};
+  font-weight: 800;
+
+  ${device.tablet} {
+    font-size: ${size.medium};
+  }
 `;
 
 export default DetailBody;

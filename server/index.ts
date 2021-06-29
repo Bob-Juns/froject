@@ -2,7 +2,7 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('./db.json');
 const middlewares = jsonServer.defaults({
-	static: '../build',
+  static: '../build',
 });
 
 const port = process.env.PORT || 8888;
@@ -12,5 +12,5 @@ server.use(jsonServer.bodyParser);
 server.use(router);
 
 server.listen(port, () => {
-	console.log(`json-server is running on ${port}`);
+  console.log(`json-server is running on ${port}`);
 });
