@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
+
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // styles
 import styled from 'styled-components';
-import { size, color, screen, device } from '@styles/SharedStyle';
+import { size, color, device } from '@styles/SharedStyle';
 
 // components
 import Layout from '@components/Layout';
@@ -10,39 +13,61 @@ import Provided from '@components/Provided';
 import Requirement from '@components/Requirement';
 import GettingStarted from '@components/GettingStarted';
 
-const Detail = () => {
-  const dummy =
-    'https://firebasestorage.googleapis.com/v0/b/froject-3d063.appspot.com/o/calc.png?alt=media&token=0a2fd694-14bd-4308-a601-68d1b5649f53';
+interface ProjectDataType {
+  id: string;
+  title: string;
+  description: string;
+  badges: string[];
+  badgeColors: string[];
+  cover: string;
+  files: string;
+  provided: string[];
+  requirement: string[];
+}
 
-  const dummyAsset =
-    'https://firebasestorage.googleapis.com/v0/b/froject-3d063.appspot.com/o/Calculator.zip?alt=media&token=03dfd69d-c7f3-4cae-a182-aa7609e8d7d5';
+const Detail = () => {
+  const { id } = useParams<{ id: undefined | string }>();
+  const [projectData, setProjectData] = useState<ProjectDataType>();
+  const [gettingStartedData, setGettingStartedData] = useState<string[]>();
+
+  useEffect(() => {
+    const getProjectData = axios.get(`/projectData/${id}`);
+    const getGettingStartedData = axios.get(`/gettingStartedData`);
+
+    axios
+      .all([getProjectData, getGettingStartedData])
+      .then(
+        axios.spread((...responses: AxiosResponse[]) => {
+          setProjectData(responses[0].data);
+          setGettingStartedData(responses[1].data);
+        }),
+      )
+      .catch((error: Error | AxiosError) => {
+        console.log(error);
+      });
+  }, []);
 
   const onClickDownload = (): void => {
-    window.open(dummyAsset, '_self');
+    window.open(projectData.files, '_self');
   };
   return (
     <Layout>
       <Container>
-        <Image src={dummy} alt="calculator image"></Image>
+        <Image src={projectData?.cover} alt="calculator image"></Image>
         <Info>
           <Badges>
             <Badge>html</Badge>
             <Badge>css</Badge>
             <Badge>js</Badge>
           </Badges>
-          <Title>계산기 (Calculator)</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque
-            incidunt eos harum quia! Beatae pariatur, ipsa nulla animi vel
-            tempore quam, quia nostrum qui incidunt quo minus aperiam ipsam
-            perferendis!
-          </Desc>
-          <Provided />
+          <Title>{projectData?.title}</Title>
+          <Desc>{projectData?.description}</Desc>
+          <Provided data={projectData?.provided} />
           <Button onClick={onClickDownload}>Download Assets</Button>
         </Info>
         <Body>
-          <Requirement />
-          <GettingStarted />
+          <Requirement data={projectData?.requirement} />
+          <GettingStarted data={gettingStartedData} />
         </Body>
       </Container>
     </Layout>

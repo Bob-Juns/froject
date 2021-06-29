@@ -8,7 +8,12 @@ import { size, color, device } from '@styles/SharedStyle';
 import PlusIcon from '@assets/plus.svg';
 import MinusIcon from '@assets/minus.svg';
 
-const FaqBox = () => {
+interface FaqBoxProps {
+  question: string;
+  answer: string;
+}
+
+const FaqBox = ({ question, answer }: FaqBoxProps) => {
   const [answerOpen, setAnswerOpen] = useState<boolean>(false);
 
   const answerOpenHandler = (): void => {
@@ -17,17 +22,10 @@ const FaqBox = () => {
   return (
     <Container>
       <Questions onClick={answerOpenHandler}>
-        <Question>Lorem Ipsum</Question>
+        <Question>{question}</Question>
         {answerOpen ? <Minus /> : <Plus />}
       </Questions>
-      {answerOpen && (
-        <Answer>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea harum
-          tempore doloremque eaque eius nemo sunt quisquam eligendi adipisci
-          ipsum assumenda dolore placeat deserunt nihil accusantium quam, a quis
-          itaque.
-        </Answer>
-      )}
+      {answerOpen && <Answer>{answer}</Answer>}
     </Container>
   );
 };

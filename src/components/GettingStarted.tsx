@@ -5,13 +5,19 @@ import { size, device } from '@styles/SharedStyle';
 
 import DetailBody from '@components/shared/DetailBody';
 
-const GettingStarted = () => {
+interface GettingStartedProps {
+  data: string[] | undefined;
+}
+
+const GettingStarted = ({ data }: GettingStartedProps) => {
   return (
     <DetailBody title="시작하기">
       <List>
-        <Item>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</Item>
-        <Item>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</Item>
-        <Item>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</Item>
+        {data?.map((item: string, index: number) => (
+          <Item key={item}>
+            {index + 1}. &nbsp;{item}
+          </Item>
+        ))}
       </List>
     </DetailBody>
   );
@@ -27,9 +33,6 @@ const List = styled.ul`
 const Item = styled.li`
   font-size: ${size.tiny};
   line-height: 1.3;
-  &:before {
-    content: '# ';
-  }
 
   ${device.tablet} {
     font-size: ${size.base};

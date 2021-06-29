@@ -5,29 +5,26 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { size, color } from '@styles/SharedStyle';
 
-const Card = () => {
-  const dummy =
-    'https://firebasestorage.googleapis.com/v0/b/froject-3d063.appspot.com/o/calc.png?alt=media&token=0a2fd694-14bd-4308-a601-68d1b5649f53';
+interface CardProps {
+  id: string;
+  cover: string;
+  children: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+const Card = ({ id, cover, children, title, description }: CardProps) => {
   return (
     <Container>
-      <Link to={`/project/calculator`}>
+      <Link to={`/project/${id}`}>
         <Images>
-          <Image src={dummy} alt="Calculator image" />
+          <Image src={cover} alt="Calculator image" />
         </Images>
         <Wrapper>
-          <Badges>
-            <Badge>html</Badge>
-            <Badge>css</Badge>
-            <Badge>js</Badge>
-          </Badges>
+          <Badges>{children}</Badges>
           <Info>
-            <Title>계산기 (Calculator)</Title>
-            <Desc>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Doloremque incidunt eos harum quia! Beatae pariatur, ipsa nulla
-              animi vel tempore quam, quia nostrum qui incidunt quo minus
-              aperiam ipsam perferendis!
-            </Desc>
+            <Title>{title}</Title>
+            <Desc>{description}</Desc>
           </Info>
         </Wrapper>
       </Link>

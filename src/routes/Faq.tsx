@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // styles
 import styled from 'styled-components';
@@ -11,7 +13,26 @@ import FaqBox from '@components/FaqBox';
 // assets
 import FaqImg from '@assets/faq.png';
 
+interface FaqDataType {
+  id: number;
+  question: string;
+  answer: string;
+}
+
 const Faq = () => {
+  const [faqData, setFaqData] = useState<FaqDataType[]>();
+
+  useEffect(() => {
+    axios
+      .get<FaqDataType>('/faqData')
+      .then((response: AxiosResponse) => {
+        setFaqData(response.data);
+      })
+      .catch((error: Error | AxiosError) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <Layout>
       <Container>
@@ -19,9 +40,13 @@ const Faq = () => {
         <Wrapper>
           <Title>자주 묻는 질문</Title>
           <Faqs>
-            <FaqBox />
-            <FaqBox />
-            <FaqBox />
+            {faqData?.map((item: FaqDataType) => (
+              <FaqBox
+                key={item.id}
+                question={item.question}
+                answer={item.answer}
+              />
+            ))}
           </Faqs>
         </Wrapper>
       </Container>

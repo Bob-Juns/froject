@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 // styles
 import styled from 'styled-components';
@@ -7,14 +9,52 @@ import { size, device } from '@styles/SharedStyle';
 // components
 import Layout from '@components/Layout';
 import Card from '@components/shared/Card';
+import Badge from '@components/shared/Badge';
+
+interface ProjectDataType {
+  id: string;
+  title: string;
+  description: string;
+  badges: string[];
+  badgeColors: string[];
+  cover: string;
+  files: string;
+  provided: string[];
+  requirement: string[];
+}
 
 const Projects = () => {
+  const [projectData, setProjectData] = useState<ProjectDataType[]>([]);
+  useEffect(() => {
+    axios
+      .get<ProjectDataType>('/projectData')
+      .then((response: AxiosResponse) => {
+        setProjectData(response.data);
+      })
+      .catch((error: Error | AxiosError) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <Layout>
       <Container>
-        <Card />
-        <Card />
-        <Card />
+        {projectData.map((item: ProjectDataType) => (
+          <Card
+            key={item.id}
+            id={item.id}
+            cover={item.cover}
+            title={item.title}
+            description={item.description}
+          >
+            {item.badges.map((badge: string, index: number) => (
+              <Badge
+                key={badge}
+                badgeColor={item.badgeColors[index]}
+                text={badge}
+              />
+            ))}
+          </Card>
+        ))}
       </Container>
     </Layout>
   );

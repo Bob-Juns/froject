@@ -5,13 +5,17 @@ import { size, device } from '@styles/SharedStyle';
 
 import DetailBody from '@components/shared/DetailBody';
 
-const Requirement = () => {
+interface RequirementProps {
+  data: string[] | undefined;
+}
+
+const Requirement = ({ data }: RequirementProps) => {
   return (
     <DetailBody title="요구사항">
       <List>
-        <Item>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</Item>
-        <Item>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</Item>
-        <Item>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</Item>
+        {data?.map((item: string) => (
+          <Item key={item}>{item}</Item>
+        ))}
       </List>
     </DetailBody>
   );
