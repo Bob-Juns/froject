@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from '@routes/Home';
 import Projects from '@routes/Projects';
 import Detail from '@routes/Detail';
+import Faq from '@routes/Faq';
 
 const App = () => {
 	return (
@@ -12,6 +13,7 @@ const App = () => {
 			<Switch>
 				<Route exact path='/' component={Home} />
 				<Route path='/projects' component={Projects} />
+				<Route path='/faq' component={Faq} />
 			</Switch>
 			<Route path='/project/calculator' component={Detail} />
 		</Router>
