@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import axios, { AxiosError, AxiosResponse } from 'axios';
+
+// styles
 import styled from 'styled-components';
 import { size, device } from '@styles/SharedStyle';
 
+// components
 import DetailBody from '@components/shared/DetailBody';
 
-interface GettingStartedProps {
-  data: string[] | undefined;
+interface GettingStartedDataType {
+  _id: string;
+  info: string;
 }
 
-const GettingStarted = ({ data }: GettingStartedProps) => {
+const GettingStarted = () => {
+  const [data, setData] = useState<GettingStartedDataType[]>([]);
+
+  useEffect(() => {
+    axios
+      .get<GettingStartedDataType>('/information')
+      .then((response: AxiosResponse) => {
+        setData(response.data);
+      })
+      .catch((error: Error | AxiosError) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
     <DetailBody title="시작하기">
       <List>
-        {data?.map((item: string, index: number) => (
-          <Item key={item}>
-            {index + 1}. &nbsp;{item}
+        {data?.map((item: GettingStartedDataType, index: number) => (
+          <Item key={item._id}>
+            {index + 1}. &nbsp;{item.info}
           </Item>
         ))}
       </List>

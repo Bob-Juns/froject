@@ -12,9 +12,11 @@ import Layout from '@components/Layout';
 import Provided from '@components/Provided';
 import Requirement from '@components/Requirement';
 import GettingStarted from '@components/GettingStarted';
+import Badge from '@components/shared/Badge';
 
 interface ProjectDataType {
-  id: string;
+  _id: string;
+  projectId: string;
   title: string;
   description: string;
   badges: string[];
@@ -26,29 +28,22 @@ interface ProjectDataType {
 }
 
 const Detail = () => {
-  const { id } = useParams<{ id: undefined | string }>();
+  const { projectId } = useParams<{ projectId: string | undefined }>();
   const [projectData, setProjectData] = useState<ProjectDataType>();
-  const [gettingStartedData, setGettingStartedData] = useState<string[]>();
 
   useEffect(() => {
-    const getProjectData = axios.get(`/projectData/${id}`);
-    const getGettingStartedData = axios.get(`/gettingStartedData`);
-
     axios
-      .all([getProjectData, getGettingStartedData])
-      .then(
-        axios.spread((...responses: AxiosResponse[]) => {
-          setProjectData(responses[0].data);
-          setGettingStartedData(responses[1].data);
-        }),
-      )
+      .get<ProjectDataType>(`/projects/${projectId}`)
+      .then((response: AxiosResponse) => {
+        setProjectData(response.data);
+      })
       .catch((error: Error | AxiosError) => {
         console.log(error);
       });
   }, []);
 
   const onClickDownload = (): void => {
-    window.open(projectData.files, '_self');
+    window.open(projectData?.files, '_self');
   };
   return (
     <Layout>
@@ -56,9 +51,13 @@ const Detail = () => {
         <Image src={projectData?.cover} alt="calculator image"></Image>
         <Info>
           <Badges>
-            <Badge>html</Badge>
-            <Badge>css</Badge>
-            <Badge>js</Badge>
+            {projectData?.badges.map((item: string, index: number) => (
+              <Badge
+                key={item}
+                badgeColor={projectData?.badgeColors[index]}
+                text={item}
+              />
+            ))}
           </Badges>
           <Title>{projectData?.title}</Title>
           <Desc>{projectData?.description}</Desc>
@@ -67,7 +66,7 @@ const Detail = () => {
         </Info>
         <Body>
           <Requirement data={projectData?.requirement} />
-          <GettingStarted data={gettingStartedData} />
+          <GettingStarted />
         </Body>
       </Container>
     </Layout>
@@ -112,14 +111,6 @@ const Badges = styled.ul`
   }
 `;
 
-const Badge = styled.li`
-  color: ${color.purple.dark};
-
-  font-size: ${size.tiny};
-  font-weight: 600;
-  text-transform: uppercase;
-`;
-
 const Info = styled.dl`
   width: 100%;
   height: fit-content;
@@ -150,7 +141,7 @@ const Desc = styled.dd`
   line-height: 1.2;
 
   ${device.desktop} {
-    font-size: ${size.small};
+    font-size: ${size.base};
   }
 `;
 

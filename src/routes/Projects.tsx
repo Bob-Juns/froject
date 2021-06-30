@@ -12,7 +12,8 @@ import Card from '@components/shared/Card';
 import Badge from '@components/shared/Badge';
 
 interface ProjectDataType {
-  id: string;
+  _id: string;
+  projectId: string;
   title: string;
   description: string;
   badges: string[];
@@ -27,7 +28,7 @@ const Projects = () => {
   const [projectData, setProjectData] = useState<ProjectDataType[]>([]);
   useEffect(() => {
     axios
-      .get<ProjectDataType>('/projectData')
+      .get<ProjectDataType>('/projects')
       .then((response: AxiosResponse) => {
         setProjectData(response.data);
       })
@@ -38,10 +39,10 @@ const Projects = () => {
   return (
     <Layout>
       <Container>
-        {projectData.map((item: ProjectDataType) => (
+        {projectData?.map((item: ProjectDataType) => (
           <Card
-            key={item.id}
-            id={item.id}
+            key={item._id}
+            id={item.projectId}
             cover={item.cover}
             title={item.title}
             description={item.description}

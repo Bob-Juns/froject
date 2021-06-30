@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/projects" component={Projects} />
         <Route path="/faq" component={Faq} />
       </Switch>
-      <Route path="/project/:id" component={Detail} />
+      <Route path="/project/:projectId" component={Detail} />
     </Router>
   );
 };

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve  --progress",
-    "server": "json-server --watch ./server/db.json --port 8888"
+    "build": "cross-env NODE_ENV=production webpack --progress"
   },
   "dependencies": {
     "@types/json-server": "^0.14.3",
@@ -47,6 +47,5 @@
   "engines": {
     "node": "12.18.3",
     "yarn": "1.22.10"
-  },
-  "proxy": "http://localhost:8888"
+  }
 }

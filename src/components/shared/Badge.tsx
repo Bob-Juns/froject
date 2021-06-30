@@ -11,6 +11,7 @@ interface BadgeProps {
 const Badge = ({ badgeColor, text }: BadgeProps) => {
   return <Item color={badgeColor}>{text}</Item>;
 };
+
 const Item = styled.li`
   color: ${(props: { color: string }) => props.color};
 

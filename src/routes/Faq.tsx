@@ -14,7 +14,7 @@ import FaqBox from '@components/FaqBox';
 import FaqImg from '@assets/faq.png';
 
 interface FaqDataType {
-  id: number;
+  _id: string;
   question: string;
   answer: string;
 }
@@ -24,7 +24,7 @@ const Faq = () => {
 
   useEffect(() => {
     axios
-      .get<FaqDataType>('/faqData')
+      .get<FaqDataType>('/faqs')
       .then((response: AxiosResponse) => {
         setFaqData(response.data);
       })
@@ -42,7 +42,7 @@ const Faq = () => {
           <Faqs>
             {faqData?.map((item: FaqDataType) => (
               <FaqBox
-                key={item.id}
+                key={item._id}
                 question={item.question}
                 answer={item.answer}
               />
