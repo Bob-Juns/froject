@@ -9,6 +9,7 @@ import { size, color, screen, device } from '@styles/SharedStyle';
 // components
 import Layout from '@components/Layout';
 import FaqBox from '@components/FaqBox';
+import Loading from '@components/shared/Loading';
 
 // assets
 import FaqImg from '@assets/faq.png';
@@ -21,17 +22,22 @@ interface FaqDataType {
 
 const Faq = () => {
   const [faqData, setFaqData] = useState<FaqDataType[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get<FaqDataType>('/faqs')
       .then((response: AxiosResponse) => {
         setFaqData(response.data);
+        setIsLoading(false);
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);
       });
   }, []);
+
+  if (isLoading) return <Loading />;
 
   return (
     <Layout>

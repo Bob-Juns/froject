@@ -10,6 +10,7 @@ import { size, device } from '@styles/SharedStyle';
 import Layout from '@components/Layout';
 import Card from '@components/shared/Card';
 import Badge from '@components/shared/Badge';
+import Loading from '@components/shared/Loading';
 
 interface ProjectDataType {
   _id: string;
@@ -26,16 +27,22 @@ interface ProjectDataType {
 
 const Projects = () => {
   const [projectData, setProjectData] = useState<ProjectDataType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get<ProjectDataType>('/projects')
       .then((response: AxiosResponse) => {
         setProjectData(response.data);
+        setIsLoading(false);
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);
       });
   }, []);
+
+  if (isLoading) return <Loading />;
+
   return (
     <Layout>
       <Container>
