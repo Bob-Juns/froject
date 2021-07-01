@@ -92,6 +92,7 @@ const Image = styled.img`
 
 const Wrapper = styled.div`
   width: 100%;
+
   padding: ${size.medium};
 
   display: flex;

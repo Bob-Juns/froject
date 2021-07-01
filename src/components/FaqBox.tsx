@@ -30,8 +30,9 @@ const FaqBox = ({ question, answer }: FaqBoxProps) => {
   );
 };
 
-const Container = styled.section`
+const Container = styled.div`
   width: 100%;
+  height: fit-content;
 
   border: 1px solid ${color.gray.base};
   border-radius: 6px;
@@ -42,6 +43,7 @@ const Questions = styled.div`
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   cursor: pointer;
 
@@ -52,6 +54,7 @@ const Questions = styled.div`
 
 const Question = styled.h1`
   color: ${color.purple.dark};
+
   font-size: ${size.tiny};
   font-weight: 700;
 
@@ -62,19 +65,25 @@ const Question = styled.h1`
 
 const Plus = styled(PlusIcon)`
   width: ${size.tiny};
+  height: ${size.tiny};
+
   color: ${color.purple.base};
 
   ${device.tablet} {
     width: ${size.small};
+    height: ${size.small};
   }
 `;
 
 const Minus = styled(MinusIcon)`
   width: ${size.tiny};
+  height: ${size.tiny};
+
   color: ${color.purple.base};
 
   ${device.tablet} {
     width: ${size.small};
+    height: ${size.small};
   }
 `;
 
