@@ -111,23 +111,27 @@ const Menus = styled.div`
 
 const Hamburger = styled(MenuIcon)`
   width: ${size.base};
+  height: ${size.base};
   color: ${color.green.dark};
 
   cursor: pointer;
 
   ${device.tablet} {
     width: ${size.large};
+    height: ${size.large};
   }
 `;
 
 const Close = styled(CloseIcon)`
   width: ${size.base};
+  height: ${size.base};
   color: ${color.green.dark};
 
   cursor: pointer;
 
   ${device.tablet} {
     width: ${size.large};
+    height: ${size.large};
   }
 `;
 export default Nav;

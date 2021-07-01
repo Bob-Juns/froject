@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
@@ -13,6 +13,7 @@ import Provided from '@components/Provided';
 import Requirement from '@components/Requirement';
 import GettingStarted from '@components/GettingStarted';
 import Badge from '@components/shared/Badge';
+import Loading from '@components/shared/Loading';
 
 interface ProjectDataType {
   _id: string;
@@ -29,6 +30,7 @@ interface ProjectDataType {
 
 const Detail = () => {
   const { projectId } = useParams<{ projectId: string | undefined }>();
+
   const [projectData, setProjectData] = useState<ProjectDataType>();
 
   useEffect(() => {
