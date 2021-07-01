@@ -62,6 +62,7 @@ const Item = styled.li`
   font-size: ${size.base};
   font-weight: 600;
   text-align: center;
+  text-transform: uppercase;
 
   cursor: pointer;
 

@@ -34,6 +34,7 @@ const Faq = () => {
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);
+        setIsLoading(false);
       });
   }, []);
 

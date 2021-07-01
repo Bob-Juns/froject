@@ -38,6 +38,7 @@ const Projects = () => {
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);
+        setIsLoading(false);
       });
   }, []);
 
