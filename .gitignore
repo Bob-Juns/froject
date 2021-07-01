@@ -4,4 +4,4 @@ yarn.lock
 dist
 build
 
-config.ts
+.env
