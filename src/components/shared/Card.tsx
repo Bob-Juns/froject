@@ -80,14 +80,6 @@ const Badges = styled.ul`
   gap: 6px;
 `;
 
-const Badge = styled.li`
-  color: ${color.purple.dark};
-
-  font-size: ${size.tiny};
-  font-weight: 600;
-  text-transform: uppercase;
-`;
-
 const Info = styled.dl`
   display: flex;
   flex-direction: column;

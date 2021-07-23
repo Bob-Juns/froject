@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 
 // styles
 import styled from 'styled-components';
@@ -103,4 +103,4 @@ const Answer = styled.p`
   }
 `;
 
-export default FaqBox;
+export default memo(FaqBox);
