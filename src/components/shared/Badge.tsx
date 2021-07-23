@@ -12,8 +12,8 @@ const Badge = ({ badgeColor, text }: BadgeProps) => {
   return <Item color={badgeColor}>{text}</Item>;
 };
 
-const Item = styled.li`
-  color: ${(props: { color: string }) => props.color};
+const Item = styled.li<{ color: string }>`
+  color: ${(props) => props.color};
 
   font-size: ${size.tiny};
   font-weight: 600;

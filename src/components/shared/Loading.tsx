@@ -2,7 +2,6 @@ import React from 'react';
 
 // styles
 import styled from 'styled-components';
-import { size } from '@styles/SharedStyle';
 
 // assets
 import LoadingImg from '@assets/loading.gif';
@@ -19,15 +18,13 @@ const Container = styled.section`
   width: 100vw;
   height: 100vh;
 
-  background-color: #f1f2f3;
-
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const Loader = styled.img`
-  width: calc(2 * ${size.huge});
+  width: 100px;
 `;
 
 export default Loading;
