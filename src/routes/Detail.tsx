@@ -50,7 +50,7 @@ const Detail = () => {
   return (
     <Layout>
       <Container>
-        <Image src={projectData?.cover} alt="calculator image"></Image>
+        <Image src={projectData?.cover} alt="calculator image" />
         <Info>
           <Badges>
             {projectData?.badges.map((item: string, index: number) => (
@@ -103,7 +103,6 @@ const Image = styled.img`
 
 const Badges = styled.ul`
   width: 100%;
-  height: fit-content;
   display: flex;
   justify-content: flex-start;
   gap: 6px;
@@ -115,7 +114,6 @@ const Badges = styled.ul`
 
 const Info = styled.dl`
   width: 100%;
-  height: fit-content;
 
   display: flex;
   flex-direction: column;
@@ -150,6 +148,7 @@ const Desc = styled.dd`
 const Button = styled.button`
   width: 100%;
   padding: ${size.base};
+  margin-top: auto;
 
   color: #fff;
   background-color: ${color.green.dark};
