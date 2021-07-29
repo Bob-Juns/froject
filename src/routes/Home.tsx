@@ -19,7 +19,7 @@ const Home = () => {
           <Title>
             Fro<Gray>ntend Pro</Gray>ject
           </Title>
-          <Subtitle>Create your own project with Challenges</Subtitle>
+          <Subtitle>Create your own project with guides</Subtitle>
         </Hgroup>
       </Container>
     </Layout>

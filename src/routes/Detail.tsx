@@ -13,7 +13,6 @@ import Provided from '@components/Provided';
 import Requirement from '@components/Requirement';
 import GettingStarted from '@components/GettingStarted';
 import Badge from '@components/shared/Badge';
-import Loading from '@components/shared/Loading';
 
 interface ProjectDataType {
   _id: string;
@@ -47,6 +46,7 @@ const Detail = () => {
   const onClickDownload = (): void => {
     window.open(projectData?.files, '_self');
   };
+
   return (
     <Layout>
       <Container>
