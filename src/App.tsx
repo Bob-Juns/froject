@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // routes
@@ -7,7 +7,16 @@ import Projects from '@routes/Projects';
 import Detail from '@routes/Detail';
 import Faq from '@routes/Faq';
 
+import GA4React from 'ga-4-react';
+
+const trackingId = process.env.GA_TRACKING_ID;
+
 const App = () => {
+  useEffect(() => {
+    trackingId && new GA4React(trackingId).initialize();
+  }, [trackingId]);
+
+  console.log(trackingId);
   return (
     <Router>
       <Switch>
