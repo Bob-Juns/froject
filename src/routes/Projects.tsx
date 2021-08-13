@@ -12,6 +12,9 @@ import Card from '@components/shared/Card';
 import Badge from '@components/shared/Badge';
 import Loading from '@components/shared/Loading';
 
+// hooks
+import useTitle from '@hooks/useTitle';
+
 interface ProjectDataType {
   _id: string;
   projectId: string;
@@ -28,6 +31,8 @@ interface ProjectDataType {
 const Projects = () => {
   const [projectData, setProjectData] = useState<ProjectDataType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const changeTitle = useTitle();
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -35,6 +40,7 @@ const Projects = () => {
       .then((response: AxiosResponse) => {
         setProjectData(response.data);
         setIsLoading(false);
+        changeTitle('froject - projects');
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);

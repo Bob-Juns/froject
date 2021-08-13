@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // styles
 import styled from 'styled-components';
@@ -10,7 +10,16 @@ import Layout from '@components/Layout';
 // assets
 import MainImg from '@assets/developer.png';
 
+// hooks
+import useTitle from '@hooks/useTitle';
+
 const Home = () => {
+  const changeTitle = useTitle();
+
+  useEffect(() => {
+    changeTitle('froject - Home');
+  }, []);
+
   return (
     <Layout>
       <Container>

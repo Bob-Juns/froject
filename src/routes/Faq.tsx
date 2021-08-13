@@ -14,6 +14,9 @@ import Loading from '@components/shared/Loading';
 // assets
 import FaqImg from '@assets/faq.png';
 
+// hooks
+import useTitle from '@hooks/useTitle';
+
 interface FaqDataType {
   _id: string;
   question: string;
@@ -24,6 +27,8 @@ const Faq = () => {
   const [faqData, setFaqData] = useState<FaqDataType[]>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const changeTitle = useTitle();
+
   useEffect(() => {
     setIsLoading(true);
     axios
@@ -31,6 +36,7 @@ const Faq = () => {
       .then((response: AxiosResponse) => {
         setFaqData(response.data);
         setIsLoading(false);
+        changeTitle('froject - faq');
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);

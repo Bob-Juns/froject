@@ -14,6 +14,8 @@ import Requirement from '@components/Requirement';
 import GettingStarted from '@components/GettingStarted';
 import Badge from '@components/shared/Badge';
 
+import useTitle from '@hooks/useTitle';
+
 interface ProjectDataType {
   _id: string;
   projectId: string;
@@ -29,14 +31,16 @@ interface ProjectDataType {
 
 const Detail = () => {
   const { projectId } = useParams<{ projectId: string | undefined }>();
-
   const [projectData, setProjectData] = useState<ProjectDataType>();
+
+  const changeTitle = useTitle();
 
   useEffect(() => {
     axios
       .get<ProjectDataType>(`/projects/${projectId}`)
       .then((response: AxiosResponse) => {
         setProjectData(response.data);
+        changeTitle(`froject - ${projectId}`);
       })
       .catch((error: Error | AxiosError) => {
         console.log(error);
