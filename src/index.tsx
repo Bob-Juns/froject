@@ -7,10 +7,7 @@ import axios from 'axios';
 import App from './App';
 import GlobalStyle from './styles/GlobalStyle';
 
-axios.defaults.baseURL =
-  process.env.NODE_ENV === 'production'
-    ? process.env.API_URI
-    : 'http://localhost:5055';
+axios.defaults.baseURL = process.env.API_URI;
 
 render(
   <>
