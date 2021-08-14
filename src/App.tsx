@@ -16,7 +16,6 @@ const App = () => {
     trackingId && new GA4React(trackingId).initialize();
   }, [trackingId]);
 
-  console.log(trackingId);
   return (
     <Router>
       <Switch>

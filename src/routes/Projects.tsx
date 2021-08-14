@@ -53,7 +53,7 @@ const Projects = () => {
   return (
     <Layout>
       <Container>
-        {projectData?.map((item: ProjectDataType) => (
+        {projectData.map((item: ProjectDataType) => (
           <Card
             key={item._id}
             id={item.projectId}
