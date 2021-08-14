@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -65,6 +66,10 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env.API_URI': JSON.stringify(process.env.API_URI),
+      'process.env.GA_TRACKING_ID': JSON.stringify(process.env.GA_TRACKING_ID),
+    }),
   ],
   devServer: {
     contentBase: './dist',
